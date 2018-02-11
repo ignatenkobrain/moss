@@ -17,35 +17,9 @@ VERSION = '0.6.dev'
 
 from setuptools import setup
 
-def check_dependencies():
-
-    # Just make sure dependencies exist, I haven't rigorously
-    # tested what the minimal versions that will work are
-    needed_deps = ["numpy", "pandas", "scipy", "sklearn",
-                   "matplotlib", "seaborn", "six"]
-    missing_deps = []
-    for dep in needed_deps:
-        try:
-            __import__(dep)
-        except ImportError:
-            missing_deps.append(dep)
-
-    if missing_deps:
-        missing = ", ".join(missing_deps)
-        raise ImportError("Missing dependencies: %s" % missing)
-
-
 if __name__ == "__main__":
     if os.path.exists('MANIFEST'):
         os.remove('MANIFEST')
-
-    import sys
-    if not (len(sys.argv) >= 2 and ('--help' in sys.argv[1:] or
-            sys.argv[1] in ('--help-commands',
-                            '--version',
-                            'egg_info',
-                            'clean'))):
-        check_dependencies()
 
     setup(name=DISTNAME,
         maintainer=MAINTAINER,
@@ -56,6 +30,9 @@ if __name__ == "__main__":
         URL=URL,
         download_url=DOWNLOAD_URL,
         packages=['moss', 'moss.tests', 'moss.psychophys', 'moss.external'],
+        install_requires=["matplotlib", "numpy", "nibabel", "pandas",
+                          "scikit-learn", "scipy", "seaborn", "six"],
+        tests_require=["nose", "pytest"],
         scripts=["bin/" + s for s in ["check_mni_reg", "recon_movie",
                                       "recon_status", "recon_qc",
                                       "recon_process_stats", "warp_qc",
