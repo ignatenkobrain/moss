@@ -30,7 +30,7 @@ if __name__ == "__main__":
         URL=URL,
         download_url=DOWNLOAD_URL,
         packages=['moss', 'moss.tests', 'moss.psychophys', 'moss.external'],
-        install_requires=["matplotlib", "numpy", "nibabel", "pandas",
+        install_requires=["matplotlib", "munch", "numpy", "nibabel", "pandas",
                           "scikit-learn", "scipy", "seaborn", "six"],
         tests_require=["nose", "pytest"],
         scripts=["bin/" + s for s in ["check_mni_reg", "recon_movie",
